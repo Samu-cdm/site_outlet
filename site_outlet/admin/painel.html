@@ -3,9 +3,42 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Painel Outlet</title>
+  <title>Painel Outlet - Irecê</title>
 </head>
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+  <script>
+    // Configuração embutida para matar o erro de Identity de uma vez
+    window.CMS_CONFIG = {
+      config: {
+        backend: {
+          name: "github",
+          repo: "Samu-cdm/site_outlet",
+          branch: "main",
+          base_url: "https://api.netlify.com",
+          auth_endpoint: "/auth"
+        },
+        load_config_file: false, // Força o painel a ignorar o config.yml externo
+        media_folder: "images",
+        public_folder: "/images",
+        collections: [
+          {
+            name: "produtos",
+            label: "Produtos",
+            folder: "produtos",
+            create: true,
+            extension: "json",
+            fields: [
+              {label: "Nome", name: "title", widget: "string"},
+              {label: "Descrição", name: "description", widget: "text"},
+              {label: "Preço", name: "price", widget: "string"},
+              {label: "Foto", name: "image", widget: "image"}
+            ]
+          }
+        ]
+      }
+    };
+  </script>
 </body>
 </html>
