@@ -94,8 +94,48 @@
     }
 
     // Inicia a busca assim que o site abre
-    carregarProdutos();
-</script>
+    async function carregarProdutos() {
+    const vitrine = document.getElementById('vitrine');
+    const repoUser = "Samu-cdm";
+    const repoName = "site_outlet";
+    
+    // AJUSTADO: Agora aponta direto para a pasta correta sem repetir o nome
+    const path = "site_outlet/produtos"; 
+    
+    try {
+        const response = await fetch(`https://api.github.com/repos/${repoUser}/${repoName}/contents/${path}`);
+        
+        if (response.status === 404) {
+            vitrine.innerHTML = "<p>Sem ofertas no momento. Fale conosco pelo WhatsApp!</p>";
+            return;
+        }
+
+        const arquivos = await response.json();
+        vitrine.innerHTML = ""; 
+
+        for (let file of arquivos) {
+            if (file.name.endsWith('.json')) {
+                const res = await fetch(file.download_url);
+                const produto = await res.json();
+
+                vitrine.innerHTML += `
+                    <div class="card">
+                        <img src="${produto.image}" alt="${produto.title}">
+                        <div class="card-info">
+                            <h3>${produto.title}</h3>
+                            <p>${produto.description}</p>
+                            <span class="price-tag">${produto.price}</span>
+                            <a href="https://wa.me/5574999994085" class="btn-zap" style="padding: 10px 20px; font-size: 0.8rem;">Consultar</a>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+    } catch (error) {
+        console.error("Erro:", error);
+        vitrine.innerHTML = "<p>Destaques em atualização. Consulte nosso catálogo no WhatsApp!</p>";
+    }
+}
 
     <section id="duvidas" class="faq">
         <div class="container">
@@ -127,4 +167,5 @@
         <a href="/painel.html" class="admin-link">Acesso Administrativo</a>
     </div>
 </footer>
+
 
