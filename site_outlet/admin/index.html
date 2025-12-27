@@ -48,7 +48,7 @@
         <div class="container">
             <h2 class="section-title">Destaques da Semana</h2>
             <div id="vitrine" class="grid-produtos">
-                <p style="text-align: center; width: 100%;">Buscando as melhores ofertas...</p>
+                <p style="text-align: center; width: 100%;">Carregando ofertas...</p>
             </div>
         </div>
     </section>
@@ -63,13 +63,11 @@
                 const response = await fetch(`https://api.github.com/repos/${repoUser}/${repoName}/contents/produtos`);
                 
                 if (!response.ok) {
-                    vitrine.innerHTML = "<p>Nenhuma oferta ativa no momento.</p>";
+                    vitrine.innerHTML = "<p>Sem ofertas cadastradas.</p>";
                     return;
                 }
 
                 const arquivos = await response.json();
-                
-                // TRAVA ANTI-DUPLICAÇÃO: Limpa tudo antes de começar a desenhar
                 vitrine.innerHTML = ""; 
 
                 for (let file of arquivos) {
@@ -77,15 +75,15 @@
                         const res = await fetch(file.download_url);
                         const produto = await res.json();
 
-                        // CORREÇÃO DA FOTO: Garante que o caminho use a pasta /images/
-                        let fotoUrl = produto.image;
-                        if (!fotoUrl.startsWith('/') && !fotoUrl.startsWith('http')) {
-                            fotoUrl = '/' + fotoUrl;
+                        // Garante que o caminho da imagem comece com /
+                        let imgUrl = produto.image;
+                        if (imgUrl && !imgUrl.startsWith('/') && !imgUrl.startsWith('http')) {
+                            imgUrl = '/' + imgUrl;
                         }
 
                         vitrine.innerHTML += `
                             <div class="card">
-                                <img src="${fotoUrl}" alt="${produto.title}" onerror="this.src='https://via.placeholder.com/400x200?text=Foto+em+Processamento'">
+                                <img src="${imgUrl}" alt="${produto.title}" onerror="this.src='https://via.placeholder.com/400x200?text=Foto+em+Processamento'">
                                 <div class="card-info">
                                     <h3>${produto.title}</h3>
                                     <p>${produto.description || ''}</p>
@@ -96,13 +94,13 @@
                         `;
                     }
                 }
-            } catch (e) {
-                vitrine.innerHTML = "<p>Erro ao carregar ofertas. Tente novamente.</p>";
+            } catch (error) {
+                vitrine.innerHTML = "<p>Erro ao carregar ofertas.</p>";
             }
         }
         
-        // Só roda uma vez quando a página carregar de verdade
-        window.onload = carregarProdutos;
+        // CORREÇÃO: Chamada única para não duplicar
+        carregarProdutos();
     </script>
 
     <section id="duvidas" class="faq">
@@ -118,7 +116,6 @@
     <footer>
         <div class="container">
             <p><strong>Outlet dos Colchões Irecê</strong></p>
-            <p style="font-size: 0.7rem; opacity: 0.5; margin-top: 10px;">Rua Augusto Pereira Nunes, 135, Centro - Irecê/BA</p>
         </div>
     </footer>
 </body>
