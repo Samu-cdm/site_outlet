@@ -2,7 +2,7 @@ backend:
   name: github
   repo: Samu-cdm/site_outlet
   branch: main
-  base_url: https://api.netlify.com # Não mude isso, é o endereço do porteiro
+  base_url: https://api.netlify.com
   auth_endpoint: /auth
 
 media_folder: "images"
@@ -11,12 +11,11 @@ public_folder: "/images"
 collections:
   - name: "produtos"
     label: "Produtos"
-    folder: "produtos" # Pasta onde os arquivos vao cair
+    folder: "produtos"
     create: true
-    extension: json # SALVAR EM JSON PARA O SITE LER FACIL
+    extension: json
     fields:
       - {label: "Nome", name: "title", widget: "string"}
       - {label: "Descrição", name: "description", widget: "text"}
       - {label: "Preço", name: "price", widget: "string"}
       - {label: "Foto", name: "image", widget: "image"}
-
