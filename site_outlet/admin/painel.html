@@ -2,10 +2,19 @@
 <html>
 <head>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Painel Outlet</title>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    // ESTA LINHA É A CHAVE: Troque pelo seu link real do Netlify
+    window.netlifyIdentity.on("init", () => {
+      window.netlifyIdentity.init({
+        API_URL: "https://SITE-DA-OUTLET.netlify.app/.netlify/identity"
+      });
+    });
+  </script>
 </body>
 </html>
