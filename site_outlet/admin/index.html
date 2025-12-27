@@ -57,45 +57,49 @@
 
     <script>
         async function carregarProdutos() {
-            const vitrine = document.getElementById('vitrine');
-            const repoUser = "Samu-cdm";
-            const repoName = "site_outlet";
-            const path = "site_outlet/produtos"; 
-            
-            try {
-                const response = await fetch(`https://api.github.com/repos/${repoUser}/${repoName}/contents/${path}`);
-                
-                if (response.status === 404) {
-                    vitrine.innerHTML = "<p>Sem ofertas cadastradas no momento.</p>";
-                    return;
-                }
+    const vitrine = document.getElementById('vitrine');
+    const repoUser = "Samu-cdm";
+    const repoName = "site_outlet";
+    
+    // SE A PASTA NO GITHUB SE CHAMA APENAS 'produtos', USE ASSIM:
+    const path = "produtos"; 
+    
+    try {
+        const response = await fetch(`https://api.github.com/repos/${repoUser}/${repoName}/contents/${path}`);
+        
+        if (response.status === 404) {
+            vitrine.innerHTML = "<p>Sem ofertas cadastradas. Use o painel para adicionar!</p>";
+            return;
+        }
 
-                const arquivos = await response.json();
-                vitrine.innerHTML = ""; 
+        const arquivos = await response.json();
+        vitrine.innerHTML = ""; 
 
-                for (let file of arquivos) {
-                    if (file.name.endsWith('.json')) {
-                        const res = await fetch(file.download_url);
-                        const produto = await res.json();
+        // Filtra apenas ficheiros .json e carrega cada um
+        for (let file of arquivos) {
+            if (file.name.endsWith('.json')) {
+                const res = await fetch(file.download_url);
+                const produto = await res.json();
 
-                        vitrine.innerHTML += `
-                            <div class="card">
-                                <img src="${produto.image}" alt="${produto.title}">
-                                <div class="card-info">
-                                    <h3>${produto.title}</h3>
-                                    <p>${produto.description || ''}</p>
-                                    <span class="price-tag">${produto.price}</span>
-                                    <a href="https://wa.me/5574999994085" class="btn-zap" style="padding: 10px 20px; font-size: 0.8rem;">Consultar</a>
-                                </div>
-                            </div>
-                        `;
-                    }
-                }
-            } catch (error) {
-                console.error("Erro:", error);
-                vitrine.innerHTML = "<p>Destaques em atualização. Consulte-nos no WhatsApp!</p>";
+                vitrine.innerHTML += `
+                    <div class="card">
+                        <img src="${produto.image}" alt="${produto.title}">
+                        <div class="card-info">
+                            <h3>${produto.title}</h3>
+                            <p>${produto.description || ''}</p>
+                            <span class="price-tag">${produto.price}</span>
+                            <a href="https://wa.me/5574999994085" class="btn-zap">Consultar</a>
+                        </div>
+                    </div>
+                `;
             }
         }
+    } catch (error) {
+        console.error("Erro:", error);
+        vitrine.innerHTML = "<p>Destaques em atualização. Fale connosco pelo WhatsApp!</p>";
+    }
+}
+carregarProdutos();
 
         // CHAMA A FUNÇÃO PARA RODAR
         carregarProdutos();
@@ -133,3 +137,4 @@
     </footer>
 </body>
 </html>
+
