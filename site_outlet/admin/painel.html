@@ -7,9 +7,8 @@
 </head>
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-
   <script>
-    // Configuração embutida para matar o erro de Identity de uma vez
+    // Configuração manual que mata o erro de Identity
     window.CMS_CONFIG = {
       config: {
         backend: {
@@ -19,7 +18,7 @@
           base_url: "https://api.netlify.com",
           auth_endpoint: "/auth"
         },
-        load_config_file: false, // Força o painel a ignorar o config.yml externo
+        load_config_file: false, // OBRIGA A IGNORAR O CONFIG.YML QUE DÁ ERRO
         media_folder: "images",
         public_folder: "/images",
         collections: [
