@@ -1,6 +1,9 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: Samu-cdm/site_outlet
   branch: main
+  base_url: https://api.netlify.com # Não mude isso, é o endereço do porteiro
+  auth_endpoint: /auth
 
 media_folder: "images"
 public_folder: "/images"
@@ -16,3 +19,4 @@ collections:
       - {label: "Descrição", name: "description", widget: "text"}
       - {label: "Preço", name: "price", widget: "string"}
       - {label: "Foto", name: "image", widget: "image"}
+
