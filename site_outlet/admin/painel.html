@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Painel de Controle - Outlet Irecê</title>
+  <title>Painel Outlet Irecê</title>
 </head>
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
@@ -17,12 +17,12 @@
           branch: "main",
           base_url: "https://api.netlify.com",
           auth_endpoint: "/auth",
-          site_id: "siteoutlet-rna6bm31r-samuel-machados-projects.vercel.app"
+          // ATUALIZADO: Este ID bate com a URL do seu erro atual
+          site_id: "siteoutlet.vercel.app" 
         },
         load_config_file: false,
-        // Configuração de Imagens para aparecerem no site
-        media_folder: "images", 
-        public_folder: "/images", 
+        media_folder: "images",
+        public_folder: "/images",
         collections: [
           {
             name: "produtos",
