@@ -1,18 +1,18 @@
 backend:
   name: git-gateway
-  branch: main
+  branch: main # ou a sua branch principal
 
-media_folder: "img/uploads"
-public_folder: "/img/uploads"
+media_folder: "site_outlet/site_outlet/images" # Onde as fotos vao ficar
+public_folder: "/images"
 
 collections:
   - name: "produtos"
-    label: "Produtos"
-    folder: "content/produtos"
+    label: "Produtos (Colchões)"
+    folder: "site_outlet/site_outlet/produtos" # Pasta onde os produtos serao salvos
     create: true
-    slug: "{{slug}}"
+    slug: "{{title}}"
     fields:
       - {label: "Nome do Produto", name: "title", widget: "string"}
-      - {label: "Descrição", name: "description", widget: "text"}
-      - {label: "Preço", name: "price", widget: "string"}
-      - {label: "Imagem", name: "image", widget: "image"}
+      - {label: "Descrição", name: "body", widget: "markdown"}
+      - {label: "Preço ou Oferta", name: "price", widget: "string"}
+      - {label: "Foto do Colchão", name: "image", widget: "image"}
