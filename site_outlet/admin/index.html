@@ -14,27 +14,24 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { line-height: 1.6; color: #333; background-color: var(--white); overflow-x: hidden; }
+        body { line-height: 1.6; color: #333; background-color: var(--white); }
         a { text-decoration: none; transition: 0.3s; }
         .container { width: 90%; max-width: 1100px; margin: auto; }
 
-        /* --- HEADER E LOGO (CORREÇÃO DE TAMANHO) --- */
+        /* --- HEADER (NÃO SEGUE MAIS A TELA) --- */
         header {
             background: var(--white); 
-            padding: 5px 0;
+            padding: 10px 0;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky; top: 0; z-index: 1000;
-            height: 120px; /* Altura fixa para controlar a logo */
-            display: flex; align-items: center;
+            position: relative; /* Mudado de sticky para relative */
+            z-index: 1000;
         }
-        .navbar { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; }
         
-        /* Forçando a logo a aparecer grande mesmo com o fundo vazio da imagem */
+        /* Logo em tamanho normal para Desktop */
         .logo-img { 
-            height: 280px; /* Tamanho exagerado para compensar o vazio */
+            height: 120px; 
             width: auto;
-            margin-top: -20px; 
-            margin-bottom: -20px;
             object-fit: contain;
         }
 
@@ -45,42 +42,40 @@
             background: linear-gradient(rgba(0, 56, 168, 0.8), rgba(0, 56, 168, 0.8)), 
                         url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1350&q=80');
             background-size: cover; background-position: center;
-            height: 60vh; display: flex; flex-direction: column; 
+            height: 50vh; display: flex; flex-direction: column; 
             justify-content: center; align-items: center; text-align: center; color: var(--white); padding: 0 20px;
         }
-        .hero h1 { font-size: 2.2rem; margin-bottom: 15px; }
+        .hero h1 { font-size: 2rem; margin-bottom: 10px; }
 
-        /* --- BOTÃO WHATSAPP --- */
+        /* --- BOTÕES --- */
         .btn-zap {
-            background: var(--whatsapp-green); color: white; padding: 15px 35px;
+            background: var(--whatsapp-green); color: white; padding: 12px 30px;
             border-radius: 50px; font-weight: bold; text-transform: uppercase;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
         }
 
         /* --- VITRINE --- */
-        .produtos { padding: 60px 0; background: var(--light-gray); }
-        .section-title { text-align: center; color: var(--primary-blue); margin-bottom: 40px; }
-        .grid-produtos { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
-        .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: center; padding-bottom: 20px; }
+        .produtos { padding: 40px 0; background: var(--light-gray); }
+        .section-title { text-align: center; color: var(--primary-blue); margin-bottom: 30px; }
+        .grid-produtos { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: center; padding-bottom: 15px; }
         .card img { width: 100%; height: 200px; object-fit: cover; }
-        .card h3 { color: var(--primary-blue); margin: 15px 0 5px; }
-        .price-tag { color: var(--whatsapp-green); font-weight: bold; display: block; margin-bottom: 15px; }
+        .card h3 { color: var(--primary-blue); margin: 10px 0; }
 
         /* --- MAPA --- */
-        .mapa-section { padding: 60px 0; text-align: center; }
-        .map-container { width: 100%; height: 400px; border-radius: 15px; overflow: hidden; margin-top: 20px; border: 2px solid var(--primary-blue); }
+        .mapa-section { padding: 40px 0; text-align: center; }
+        .map-container { width: 100%; height: 350px; border-radius: 10px; overflow: hidden; margin-top: 20px; border: 1px solid #ddd; }
 
         /* --- FOOTER --- */
-        footer { background: var(--primary-blue); color: white; padding: 40px 0; text-align: center; }
-        .admin-link { display: block; margin-top: 20px; color: rgba(255,255,255,0.4); font-size: 0.7rem; }
+        footer { background: var(--primary-blue); color: white; padding: 30px 0; text-align: center; }
+        .admin-link { display: block; margin-top: 15px; color: rgba(255,255,255,0.3); font-size: 0.7rem; }
 
         /* --- MOBILE --- */
         @media (max-width: 768px) {
-            header { height: 160px; }
             .navbar { flex-direction: column; }
-            .logo-img { height: 220px; margin-top: -40px; }
-            .nav-links { margin-top: -30px; margin-bottom: 10px; }
-            .hero h1 { font-size: 1.6rem; }
+            .logo-img { height: 100px; }
+            .nav-links { margin-top: 10px; }
+            .nav-links a { margin: 0 10px; }
+            .hero h1 { font-size: 1.5rem; }
         }
     </style>
 </head>
@@ -98,7 +93,6 @@
 
     <section class="hero">
         <h1>Sua melhor noite de sono começa aqui</h1>
-        <p>Preço de Outlet e qualidade premium em Irecê.</p><br>
         <a href="https://wa.me/5574999994085" target="_blank" class="btn-zap">Falar com Consultor</a>
     </section>
 
@@ -109,14 +103,12 @@
                 <div class="card">
                     <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70d04?auto=format&fit=crop&w=500&q=80" alt="Cama Box">
                     <h3>Cama Box King Premium</h3>
-                    <span class="price-tag">Oferta Especial</span>
-                    <a href="https://wa.me/5574999994085" class="btn-zap" style="padding: 10px 20px; font-size: 0.8rem;">Consultar Valor</a>
+                    <a href="https://wa.me/5574999994085" class="btn-zap" style="font-size: 0.8rem; padding: 8px 15px;">Consultar</a>
                 </div>
                 <div class="card">
                     <img src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=500&q=80" alt="Ortopédico">
                     <h3>Ortopédico Firme D45</h3>
-                    <span class="price-tag">Oferta Especial</span>
-                    <a href="https://wa.me/5574999994085" class="btn-zap" style="padding: 10px 20px; font-size: 0.8rem;">Consultar Valor</a>
+                    <a href="https://wa.me/5574999994085" class="btn-zap" style="font-size: 0.8rem; padding: 8px 15px;">Consultar</a>
                 </div>
             </div>
         </div>
@@ -124,10 +116,10 @@
 
     <section id="local" class="mapa-section">
         <div class="container">
-            <h2 class="section-title">Nossa Loja em Irecê</h2>
-            <p>Rua Augusto Pereira Nunes, 135, Centro (Perto da Royal Colchões)</p>
+            <h2 class="section-title">Visite Nossa Loja</h2>
+            <p>Rua Augusto Pereira Nunes, 135, Centro - Irecê/BA</p>
             <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3921.46!2d-41.8596!3d-11.3023!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x705299!2sR.%20Augusto%20Pereira%20Nunes%2C%20135%20-%20Centro%2C%20Irec%C3%AA%20-%20BA!5e0!3m2!1spt-BR!2sbr!4v1710000000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3910.871040856475!2d-41.85960000000001!3d-11.305600000000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x743eb3e994464c7%3A0xc07471239c08500!2sR.%20Augusto%20Pereira%20Nunes%2C%20135%20-%20Centro%2C%20Irec%C3%A9%20-%20BA%2C%2044900-000!5e0!3m2!1spt-BR!2sbr!4v1700000000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
     </section>
@@ -135,7 +127,6 @@
     <footer>
         <div class="container">
             <p><strong>Outlet dos Colchões Irecê</strong></p>
-            <p>© 2025 - Todos os direitos reservados</p>
             <a href="/admin" class="admin-link">Acesso Restrito</a>
         </div>
     </footer>
