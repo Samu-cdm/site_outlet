@@ -1,57 +1,42 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
-
   <meta charset="utf-8" />
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Painel Outlet Irecê</title>
-
-</head>
-
-<body>
-
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-
+</head>
+<body>
   <script>
-
     window.CMS_CONFIG = {
-
       config: {
-
         backend: {
-
           name: "github",
-
-          repo: "Samu-cdm/site_outlet",
-
+          repo: "Samu-cdm/site_outlet", // Seu repositório
           branch: "main",
-
           base_url: "https://api.netlify.com",
-
-          auth_endpoint: "/auth",
-
-          site_id: "siteoutlet.vercel.app" 
-
+          site_id: "site-outlet.netlify.app" // ID do Netlify
         },
-
         load_config_file: false,
-
-        media_folder: "site_outlet/images", // Adicionei 'site_outlet/' antes
-        public_folder: "/site_outlet/images",
+        media_folder: "images", // Pasta onde vi suas fotos
+        public_folder: "/images",
         collections: [
           {
             name: "produtos",
             label: "Produtos",
-            folder: "site_outlet/content/produtos", // Adicionei 'site_outlet/' antes
+            folder: "content", // Pasta onde vi o arquivo "mulher"
             create: true,
             extension: "json",
             fields: [
-              {label: "Nome", name: "title", widget: "string"},
-              {label: "Descrição", name: "description", widget: "text"},
-              {label: "Preço", name: "price", widget: "string"},
-              {label: "Foto", name: "image", widget: "image"}
+              { label: "Nome", name: "title", widget: "string" },
+              { label: "Preço", name: "price", widget: "string" },
+              { label: "Foto", name: "image", widget: "image" },
+              { label: "Descrição", name: "description", widget: "text", required: false }
             ]
           }
         ]
+      }
+    };
+  </script>
+</body>
+</html>
