@@ -38,46 +38,20 @@
 
         load_config_file: false,
 
-        media_folder: "images",
-
-        public_folder: "/images",
-
+        media_folder: "site_outlet/images", // Adicionei 'site_outlet/' antes
+        public_folder: "/site_outlet/images",
         collections: [
-
           {
-
             name: "produtos",
-
             label: "Produtos",
-
-            folder: "produtos",
-
+            folder: "site_outlet/content/produtos", // Adicionei 'site_outlet/' antes
             create: true,
-
             extension: "json",
-
             fields: [
-
               {label: "Nome", name: "title", widget: "string"},
-
               {label: "Descrição", name: "description", widget: "text"},
-
               {label: "Preço", name: "price", widget: "string"},
-
               {label: "Foto", name: "image", widget: "image"}
-
             ]
-
           }
-
         ]
-
-      }
-
-    };
-
-  </script>
-
-</body>
-
-</html>
