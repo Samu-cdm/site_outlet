@@ -1,44 +1,83 @@
 <!DOCTYPE html>
+
 <html>
+
 <head>
+
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Painel Outlet Irecê</title>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
 </head>
+
 <body>
+
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
   <script>
+
     window.CMS_CONFIG = {
+
       config: {
+
         backend: {
+
           name: "github",
+
           repo: "Samu-cdm/site_outlet",
+
           branch: "main",
+
           base_url: "https://api.netlify.com",
+
           auth_endpoint: "/auth",
-          site_id: "site-outlet.netlify.app" 
+
+          site_id: "siteoutlet.vercel.app" 
+
         },
+
         load_config_file: false,
-        display_url: "https://siteoutlet.vercel.app",
-        media_folder: "images", // Salva na pasta images da raiz
+
+        media_folder: "images",
+
         public_folder: "/images",
+
         collections: [
+
           {
+
             name: "produtos",
+
             label: "Produtos",
-            folder: "content/produtos", // Caminho da sua pasta de dados
+
+            folder: "produtos",
+
             create: true,
+
             extension: "json",
+
             fields: [
+
               {label: "Nome", name: "title", widget: "string"},
+
               {label: "Descrição", name: "description", widget: "text"},
+
               {label: "Preço", name: "price", widget: "string"},
+
               {label: "Foto", name: "image", widget: "image"}
+
             ]
+
           }
+
         ]
+
       }
+
     };
+
   </script>
+
 </body>
+
 </html>
