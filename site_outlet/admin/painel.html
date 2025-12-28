@@ -2,36 +2,38 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Painel Outlet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel Administrativo - Outlet dos Colchões</title>
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </head>
 <body>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script>
     window.CMS_CONFIG = {
       config: {
         backend: {
           name: "github",
-          repo: "Samu-cdm/site_outlet",
+          repo: "Samu-cdm/site_outlet", // Seu repositório
           branch: "main",
           base_url: "https://api.netlify.com",
           auth_endpoint: "/auth",
-          site_id: "site-outlet.netlify.app" 
+          site_id: "site-outlet.netlify.app" // ID que está verde na sua foto
         },
         load_config_file: false,
-        media_folder: "imagens",
-        public_folder: "/imagens",
+        publish_mode: "editorial_workflow",
+        media_folder: "images", // Pasta de fotos na raiz
+        public_folder: "/images",
         collections: [
           {
             name: "produtos",
             label: "Produtos",
-            folder: "conteúdo",
+            folder: "content/produtos", // Caminho exato da sua pasta
             create: true,
             extension: "json",
             fields: [
-              {label: "Nome", name: "title", widget: "string"},
-              {label: "Descrição", name: "description", widget: "text"},
-              {label: "Preço", name: "price", widget: "string"},
-              {label: "Foto", name: "image", widget: "image"}
+              { label: "Nome do Produto", name: "title", widget: "string" },
+              { label: "Preço", name: "price", widget: "string" },
+              { label: "Foto do Colchão", name: "image", widget: "image" },
+              { label: "Descrição", name: "body", widget: "markdown", required: false }
             ]
           }
         ]
