@@ -54,53 +54,53 @@
         </div>
     </section>
 
-    <script>
-        async function carregarProdutos() {
-            const vitrine = document.getElementById('vitrine');
-            const repoUser = "Samu-cdm";
-            const repoName = "site_outlet";
-            
-            try {
-                const response = await fetch(`https://api.github.com/repos/${repoUser}/${repoName}/contents/produtos`);
-                
-                if (!response.ok) {
-                    vitrine.innerHTML = "<p>Sem ofertas no momento.</p>";
-                    return;
+    async function carregarProdutos() {
+    const vitrine = document.getElementById('vitrine');
+    const repoUser = "Samu-cdm";
+    const repoName = "site_outlet";
+    
+    try {
+        // AJUSTE: Mudei para 'content' para bater com sua foto do GitHub
+        const response = await fetch(`https://api.github.com/repos/${repoUser}/${repoName}/contents/content`);
+        
+        if (!response.ok) {
+            vitrine.innerHTML = "<p>Sem ofertas no momento.</p>";
+            return;
+        }
+
+        const arquivos = await response.json();
+        vitrine.innerHTML = ""; 
+
+        for (let file of arquivos) {
+            if (file.name.endsWith('.json')) {
+                const res = await fetch(file.download_url);
+                const produto = await res.json();
+
+                // CORREÇÃO DA FOTO: Removemos a barra inicial para funcionar no Vercel/GitHub
+                let imgUrl = produto.image;
+                if (imgUrl && imgUrl.startsWith('/')) {
+                    imgUrl = imgUrl.substring(1); // Tira a barra / do começo
                 }
 
-                const arquivos = await response.json();
-                vitrine.innerHTML = ""; // Limpa a tela para evitar duplicação
-
-                for (let file of arquivos) {
-                    if (file.name.endsWith('.json')) {
-                        const res = await fetch(file.download_url);
-                        const produto = await res.json();
-
-                        // Garante que o caminho da imagem use /images/ corretamente
-                        let imgUrl = produto.image;
-                        if (imgUrl && !imgUrl.startsWith('/') && !imgUrl.startsWith('http')) {
-                            imgUrl = '/' + imgUrl;
-                        }
-
-                        vitrine.innerHTML += `
-                            <div class="card">
-                                <img src="${imgUrl}" alt="${produto.title}" onerror="this.src='https://via.placeholder.com/400x200?text=Imagem+Nao+Encontrada'">
-                                <div class="card-info">
-                                    <h3>${produto.title}</h3>
-                                    <p>${produto.description || ''}</p>
-                                    <span class="price-tag">R$ ${produto.price}</span>
-                                    <a href="https://wa.me/5574999994085" class="btn-zap">Consultar</a>
-                                </div>
-                            </div>
-                        `;
-                    }
-                }
-            } catch (error) {
-                console.error("Erro:", error);
-                vitrine.innerHTML = "<p>Erro ao carregar ofertas.</p>";
+                vitrine.innerHTML += `
+                    <div class="card">
+                        <img src="${imgUrl}" alt="${produto.title}" onerror="this.src='https://via.placeholder.com/400x200?text=Imagem+Nao+Encontrada'">
+                        <div class="card-info">
+                            <h3>${produto.title}</h3>
+                            <p>${produto.description || ''}</p>
+                            <span class="price-tag">R$ ${produto.price}</span>
+                            <a href="https://wa.me/5574999994085" class="btn-zap">Consultar</a>
+                        </div>
+                    </div>
+                `;
             }
         }
-        carregarProdutos(); // Chamada única
+    } catch (error) {
+        console.error("Erro:", error);
+        vitrine.innerHTML = "<p>Erro ao carregar ofertas.</p>";
+    }
+}
+carregarProdutos();
     </script>
 
     <section id="duvidas" class="faq">
@@ -135,3 +135,4 @@
     </footer>
 </body>
 </html>
+
