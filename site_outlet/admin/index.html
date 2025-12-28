@@ -55,7 +55,7 @@
             const repo = "Samu-cdm/site_outlet";
             
             try {
-                // Mantive procurando na pasta 'content' que é a correta
+                // Busca na pasta content que vi na sua foto
                 const response = await fetch(`https://api.github.com/repos/${repo}/contents/content`);
                 if (!response.ok) throw new Error("Pasta não encontrada");
 
@@ -67,14 +67,13 @@
                         const res = await fetch(file.download_url);
                         const produto = await res.json();
 
-                        // --- AQUI ESTÁ O AJUSTE DA IMAGEM ---
+                        // --- UNICA ALTERAÇÃO: CONSERTO DA IMAGEM ---
                         let imgUrl = produto.image;
-                        // 1. Remove a barra do início se tiver (corrige erro do Vercel)
                         if (imgUrl && imgUrl.startsWith('/')) imgUrl = imgUrl.substring(1);
-                        // 2. Se não for link externo, cria o link direto do GitHub (corrige erro 404)
                         if (imgUrl && !imgUrl.startsWith('http')) {
                             imgUrl = "https://raw.githubusercontent.com/" + repo + "/main/" + imgUrl;
                         }
+                        // ------------------------------------------
 
                         vitrine.innerHTML += `
                             <div class="card">
@@ -88,7 +87,7 @@
                     }
                 }
             } catch (e) {
-                vitrine.innerHTML = "<p>Nenhum produto encontrado. Verifique se cadastrou no Painel.</p>";
+                vitrine.innerHTML = "<p>Nenhum produto encontrado na pasta 'content'. Verifique o Painel.</p>";
             }
         }
         carregarProdutos();
