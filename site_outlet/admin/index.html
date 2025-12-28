@@ -24,7 +24,7 @@
         .faq-item { background: var(--light); padding: 15px; border-radius: 8px; margin-bottom: 10px; text-align: left; border-left: 5px solid var(--blue); }
         .map-container { width: 100%; height: 350px; margin-top: 20px; border-radius: 10px; overflow: hidden; border: 2px solid var(--blue); }
         footer { background: var(--blue); color: white; padding: 30px 0; text-align: center; margin-top: 20px; }
-        .admin-link { display: block; margin-top: 15px; color: rgba(255,255,255,0.4); font-size: 0.8rem; text-decoration: underline; }
+        .admin-link { display: block; margin-top: 15px; color: rgba(255,255,255,0.4); font-size: 0.8rem; }
     </style>
 </head>
 <body>
@@ -48,7 +48,7 @@
         <div class="container">
             <h2>Ofertas Disponíveis</h2>
             <div id="vitrine" class="grid-produtos">
-                <p>Carregando catálogo...</p>
+                <p>Carregando ofertas...</p>
             </div>
         </div>
     </section>
@@ -59,7 +59,7 @@
             const repo = "Samu-cdm/site_outlet";
             
             try {
-                // Folder 'content' is where the files are
+                // Pasta correta conforme seu GitHub
                 const response = await fetch(`https://api.github.com/repos/${repo}/contents/content`);
                 if (!response.ok) throw new Error();
 
@@ -71,13 +71,11 @@
                         const res = await fetch(file.download_url);
                         const produto = await res.json();
 
-                        // CORREÇÃO DA IMAGEM: Garante o link direto do GitHub
-                        let imgUrl = produto.image;
-                        if (imgUrl) {
-                            imgUrl = imgUrl.replace(/^\//, ''); // Tira a barra / do começo
-                            if (!imgUrl.startsWith('http')) {
-                                imgUrl = `https://raw.githubusercontent.com/${repo}/main/${imgUrl}`;
-                            }
+                        // AJUSTE DA FOTO: Remove barra inicial e força link do GitHub
+                        let imgUrl = produto.image || "";
+                        imgUrl = imgUrl.replace(/^\//, ''); 
+                        if (imgUrl && !imgUrl.startsWith('http')) {
+                            imgUrl = `https://raw.githubusercontent.com/${repo}/main/${imgUrl}`;
                         }
 
                         vitrine.innerHTML += `
@@ -93,7 +91,7 @@
                     }
                 }
             } catch (e) {
-                vitrine.innerHTML = "<p>Nenhum produto encontrado. Cadastre no Painel.</p>";
+                vitrine.innerHTML = "<p>Nenhuma oferta encontrada no catálogo.</p>";
             }
         }
         carregarProdutos();
@@ -118,7 +116,7 @@
             <h2>Nossa Localização</h2>
             <p>Rua Augusto Pereira Nunes, 135, Centro - Irecê/BA</p>
             <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15647.2519246144!2d-41.8596!3d-11.3039!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTHCsDE4JzE0LjAiUyA0McKwNTEnMzQuNiJX!5e0!3m2!1spt-BR!2sbr!4v1600000000000!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3908.431265691079!2d-41.859664!3d-11.303352!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTHCsDE4JzEyLjEiUyA0McKwNTEnMzQuOCJX!5e0!3m2!1spt-BR!2sbr!4v1640000000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
     </section>
