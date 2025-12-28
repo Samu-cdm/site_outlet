@@ -2,10 +2,11 @@
 <html>
 <head>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Painel Outlet Irecê</title>
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </head>
 <body>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script>
     window.CMS_CONFIG = {
       config: {
@@ -15,16 +16,17 @@
           branch: "main",
           base_url: "https://api.netlify.com",
           auth_endpoint: "/auth",
-          site_id: "siteoutlet.vercel.app" 
+          site_id: "site-outlet.netlify.app" 
         },
         load_config_file: false,
-        media_folder: "images",
+        display_url: "https://siteoutlet.vercel.app",
+        media_folder: "images", // Salva na pasta images da raiz
         public_folder: "/images",
         collections: [
           {
             name: "produtos",
             label: "Produtos",
-            folder: "produtos",
+            folder: "content/produtos", // Caminho da sua pasta de dados
             create: true,
             extension: "json",
             fields: [
