@@ -2,8 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Painel Administrativo - Outlet dos Colchões</title>
+  <title>Painel Outlet</title>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </head>
 <body>
@@ -15,25 +14,22 @@
           repo: "Samu-cdm/site_outlet", // Seu repositório
           branch: "main",
           base_url: "https://api.netlify.com",
-          auth_endpoint: "/auth",
-          site_id: "site-outlet.netlify.app" // ID que está verde na sua foto
+          site_id: "site-outlet.netlify.app" // O link verde da sua foto
         },
-        load_config_file: false,
-        publish_mode: "editorial_workflow",
-        media_folder: "images", // Pasta de fotos na raiz
+        display_url: "https://site-outlet.netlify.app",
+        media_folder: "images", // Pasta real no seu GitHub
         public_folder: "/images",
         collections: [
           {
             name: "produtos",
             label: "Produtos",
-            folder: "content/produtos", // Caminho exato da sua pasta
+            folder: "content/produtos", // Caminho que aparece na sua foto
             create: true,
             extension: "json",
             fields: [
-              { label: "Nome do Produto", name: "title", widget: "string" },
-              { label: "Preço", name: "price", widget: "string" },
-              { label: "Foto do Colchão", name: "image", widget: "image" },
-              { label: "Descrição", name: "body", widget: "markdown", required: false }
+              {label: "Nome", name: "title", widget: "string"},
+              {label: "Preço", name: "price", widget: "string"},
+              {label: "Foto", name: "image", widget: "image"}
             ]
           }
         ]
