@@ -2,12 +2,10 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Painel Outlet Irecê</title>
+  <title>Painel Outlet</title>
 </head>
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-
   <script>
     window.CMS_CONFIG = {
       config: {
@@ -17,17 +15,16 @@
           branch: "main",
           base_url: "https://api.netlify.com",
           auth_endpoint: "/auth",
-          // ATUALIZADO: Este ID bate com a URL do seu erro atual
           site_id: "site-outlet.netlify.app" 
         },
         load_config_file: false,
-        media_folder: "images",
-        public_folder: "/images",
+        media_folder: "imagens",
+        public_folder: "/imagens",
         collections: [
           {
             name: "produtos",
             label: "Produtos",
-            folder: "produtos",
+            folder: "conteúdo",
             create: true,
             extension: "json",
             fields: [
